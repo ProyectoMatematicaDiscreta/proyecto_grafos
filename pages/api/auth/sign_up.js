@@ -1,5 +1,11 @@
 //import { dbConnect } from "../../utils/DB/ConnectDB"
 //dbConnect();
+import joi from "@hapi/joi";
+const schemaRegister = joi.object({
+  name:Joi.string().min(3).max(255).required(),
+  email: Joi.string().min(6).max(255).required().email(),
+  name: Joi.string().min(8).max(1024).required(),
+})
 export default function handlerSign_up(req, res) {
   const { body, method } = req;
   if (method == "POST") {

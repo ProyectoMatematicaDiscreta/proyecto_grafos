@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "axios": "^1.1.3",
     "dotenv": "^16.0.3",
     "framer-motion": "^7.5.3",

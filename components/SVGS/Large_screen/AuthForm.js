@@ -42,10 +42,10 @@ export default function AuthForm() {
   }
 
   return (
-    <div className="bg-gradient-to-tr from-orange-400 to-teal-600  borde w-96 rounded-lg p-10 lg:w-full">
+    <div className="bg-gradient-to-tr from-orange-400 to-teal-600  borde w-96 rounded-lg p-10 lg:w-full shadow-lg shadow-orange-500 hover:shadow-xl hover:shadow-orange-500">
       <form onSubmit={handleSubmit(onSubmit)} >
         {pathname === "/sign_up" ? (<div><motion.label variants={variantsLoginformChilds} htmlFor="name" >Nombre</motion.label>
-          <motion.input variants={variantsLoginformChilds} type="text" name="name" {...register("name", { required: true, minLength: 3 })} onChange={handleChangeChecked} className="w-full p-1 mb-10   border-b-2 bg-transparent text-gray-500 " /></div>) : ""}
+          <motion.input variants={variantsLoginformChilds} type="text" name="name" {...register("name", { required: true, minLength: 3 })} onChange={handleChange} className="w-full p-1 mb-10   border-b-2 bg-transparent text-gray-500 " /></div>) : ""}
 
         <motion.label variants={variantsLoginformChilds} htmlFor="email">Correo</motion.label>
         <motion.input variants={variantsLoginformChilds} type="email" name="email" onChange={handleChange} className="w-full p-1 mb-10  border-b-2 bg-transparent  text-gray-500" />
