@@ -1,0 +1,41 @@
+#itemsNavbar{
+  
+     display: none;
+  }
+#icon{
+    display: none;
+  
+  }
+#buttoms{
+  display: flex;
+}
+
+
+  @media screen and (min-width: 0px) and (max-width: 820px){
+  #itemsNavbar{
+    display: none;
+  }
+#icon{
+    display: inline-block;
+  }
+#buttoms{
+  display: none;
+}
+  
+}
+
+  @media screen and (min-width: 820px){
+    
+  #itemsNavbar{
+    display: flex;
+    align-items: center;
+    
+    
+  }
+#icon{
+    display: none;
+  }
+#buttoms{
+  display: flex;
+}
+}

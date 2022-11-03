@@ -20,9 +20,10 @@ export const variantsPhoneMinPanel = {
 
 
 export const variantsLoginform = {
-  before: { x: 100 },
+  before: { y: 600, opacity: 0 },
   after: {
-    x: 0,
+    y: 0,
+    opacity: 1,
     transition: {
       type: "spring",
       mass: 0.8,
@@ -65,14 +66,14 @@ export const variantsMessage3 = {
 
 }
 export const variantsMessage4 = {
-  before: { d: 'M397.5 130.5h175 '},
+  before: { d: 'M397.5 130.5h175 ' },
   after: { d: 'M97.5 130.5h175 ' },
 
 
 }
 export const variantsMessageText = {
   before: { opacity: 0 },
-  after: { opacity: 1},
+  after: { opacity: 1 },
 
 
 }

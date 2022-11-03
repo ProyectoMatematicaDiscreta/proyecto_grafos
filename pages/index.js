@@ -1,11 +1,21 @@
+import Navbar from "../components/Navbar";
+import Figures from "../components/HomeFigure";
+import Figures2 from "../components/HomeFigure2";
 export default function index() {
+
+
+ 
   return (
     <div>
+      <Navbar />
       <div>
-        <h1>Que es un grafo</h1>
-        <p>Un grfo es un susecion de aristas y vectores</p>
+   <Figures/>
+     <Figures2 />
+        
       </div>
+      <div id="one" className="shape trans"></div>
 
+    
     </div>
   )
 };

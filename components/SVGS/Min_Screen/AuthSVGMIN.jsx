@@ -3,25 +3,22 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { variantsLoginform, variantsLoginformChilds, variantsMessageText, variantsPhone, variantsPhoneMinPanel } from "../../animations/VariantsLogin";
+import { variantsLoginError, variantsLoginform, variantsLoginformChilds, variantsMessageText, variantsPhone, variantsPhoneMinPanel } from "../../animations/VariantsLogin";
 
 export default function AuthMinSvg(props) {
-
+  const { pathname } = useRouter();
 
   const { register, formState: { errors }, handleSubmit } = useForm();
+
   const [userCredencials, setUserCredencials] = useState({
     name: '',
     email: '',
     password: ''
   })
-  const [isCheck, setIsCheck] = useState(false)
-  const [isCheckSesion, setIsCheckSesion] = useState(false)
-  const handleChangeChecked = () => {
-    setIsCheck(!isCheck)
-  }
-  const handleChangeCheckedSesion = () => {
-    setIsCheckSesion(!isCheckSesion)
-  }
+
+
+
+
   const onSubmit = () => {
 
     console.log(userCredencials);
@@ -29,7 +26,7 @@ export default function AuthMinSvg(props) {
   const handleChange = (e) => {
     setUserCredencials({ ...userCredencials, [e.target.name]: e.target.value })
   }
-  const { pathname } = useRouter();
+
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +82,12 @@ export default function AuthMinSvg(props) {
             transform="translate(57.48 10)"
             fill="rgba(112,112,112,0.56)"
           />
-          <motion.g
+          {errors.name?.type === 'required' && <foreignObject x="60" y="150" width="220" height="350" stroke='none'><motion.div initial="before"
+            animate="after"
+            variants={variantsLoginError}
+
+            transition={{ duration: 1.5 }} className="bg-red-600 p-2 rounded-xl text-yellow-300">El nombre es requerido.</motion.div></foreignObject>}
+          {!errors.name?.type === 'required' && <g> <motion.g
             initial="before"
             animate="after"
             variants={variantsPhoneMinPanel}
@@ -118,28 +120,27 @@ export default function AuthMinSvg(props) {
               transition={{ duration: 1.5, delay: 1 }}>
               {pathname === "/sign_up" ? "Reg\xEDstrese" : "Ingrese su usuario"}
             </motion.tspan>
-          </text>
+          </text> </g>}
+          
           <motion.foreignObject initial="before"
             animate="after"
             variants={variantsLoginform} x="20" y="150" width="210" height="450" stroke='none'>
 
             <form onSubmit={handleSubmit(onSubmit)} >
               {pathname === "/sign_up" ? (<div><motion.label variants={variantsLoginformChilds} htmlFor="name" >Nombre</motion.label>
-                <motion.input variants={variantsLoginformChilds} type="text" {...register("name", { required: true, minLength: 3 })} className="w-full p-1 mb-10   border-b-2 bg-transparent text-gray-500 " /></div>) : ""}
+                <motion.input variants={variantsLoginformChilds} type="text" {...register("name", { required: true, minLength: 3 })} className="w-full p-1 mb-5   border-b-2 bg-transparent text-gray-500  caret-yellow-500  " /></div>) : ""}
 
               <motion.label variants={variantsLoginformChilds} htmlFor="email">Correo</motion.label>
-              <motion.input variants={variantsLoginformChilds} type="email" name="email" onChange={handleChange} className="w-full p-1 mb-10  border-b-2 bg-transparent  text-gray-500" />
+              <motion.input variants={variantsLoginformChilds} type="email" name="email" onChange={handleChange} className="w-full p-1 mb-5  border-b-2 bg-transparent  text-gray-500 caret-yellow-500  " />
               <motion.label variants={variantsLoginformChilds} htmlFor="password">Contraseña</motion.label>
-              <motion.input variants={variantsLoginformChilds} type="password" name="password" onChange={handleChange} className="w-full p-1 mb-10 border-b-2 bg-transparent text-gray-500 " />
+              <motion.input variants={variantsLoginformChilds} type="password" name="password" onChange={handleChange} className="w-full p-1 mb-5 border-b-2 bg-transparent text-gray-500 caret-yellow-500   " />
+              {pathname === "/sign_up" ? <div> <motion.label variants={variantsLoginformChilds} htmlFor="confirmPassword">Confirmar contraseña</motion.label>
+                <motion.input variants={variantsLoginformChilds} type="password" name="confirmPassword" onChange={handleChange} className="w-full p-1 mb-5 border-b-2 bg-transparent text-gray-500 caret-yellow-500  " /> </div> : ''}
 
 
-              <motion.input variants={variantsLoginformChilds} type="checkbox" value="" id="" checked={isCheck} onChange={handleChangeChecked} />
-              <motion.label variants={variantsLoginformChilds} className="text-xs">Acepta los <Link href="/"><a className="text-blue-500"  > Terminos y
-                Condiciones </a></Link>de la empresa</motion.label>
               <br />
-              <motion.input variants={variantsLoginformChilds} type="checkbox" value="" id="" checked={isCheckSesion} onChange={handleChangeCheckedSesion} />
-              <motion.label variants={variantsLoginformChilds} className="text-xs">Mantener la sesión iniciada</motion.label>
-              {pathname === "/sign_up" ? <motion.button variants={variantsLoginformChilds} type="submit" className={`w-full bg-gray-500 p-2 rounded-xl mt-6 ${isCheck === false ? 'invisible' : 'visible'}`}>Crear</motion.button> : <motion.button variants={variantsLoginformChilds} type="submit" className={`w-full h-16 bg-gray-500 p-2 rounded-xl mt-16  ${isCheck === false ? 'invisible' : 'visible'}`}>Ingresar</motion.button>}
+
+              {pathname === "/sign_up" ? <motion.button variants={variantsLoginformChilds} type="submit" className='w-full bg-gray-500 p-2 rounded-xl mt-6'>Crear</motion.button> : <motion.button variants={variantsLoginformChilds} type="submit" className='w-full h-16 bg-gray-500 p-2 rounded-xl mt-16 '>Ingresar</motion.button>}
 
 
             </form>
