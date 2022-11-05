@@ -1,4 +1,6 @@
-
+/* Codigo realizado por lizardo */
+/* Pagina del ingreso */
+// Importacion de librerias
 import { motion } from "framer-motion";
 import {
   variantsLoginform,
@@ -10,7 +12,7 @@ import { supabase } from "../../../supabase/client";
 export default function AuthForm() {
   const { pathname } = useRouter();
 
-
+//Login con la api de supabase y con las cuentas de google
   async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',

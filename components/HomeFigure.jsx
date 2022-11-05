@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+//SVG
 export default function Figures(props) {
   return (
     <svg

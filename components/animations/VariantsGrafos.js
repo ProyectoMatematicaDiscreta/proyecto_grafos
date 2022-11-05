@@ -1,3 +1,4 @@
+//VARIANTES PARA ANIMACION DE LOS GRAFOS
 export const variantsHome = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },

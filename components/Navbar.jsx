@@ -56,6 +56,7 @@ export default function Navbar() {
               <Link href="sign_up"><a className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-green-700 rounded-md shadow hover:bg-yellow-400">
                 Registrarse
               </a></Link>
+              
             </div> : <div className="flex">  <p className="my-auto bg-amber-400 p-4  rounded-t-2xl">{user.name}</p>  <form onSubmit={handleSubmit}><button className="bg-red-600 p-4 ml-4 rounded-t-2xl" type="submit">Cerrar Session</button></form></div>}
 
 

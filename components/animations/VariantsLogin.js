@@ -1,3 +1,4 @@
+//VARIANTES PARA ANIMACION DEL LOGIN
 export const variantsPhone = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },

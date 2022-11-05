@@ -1,3 +1,4 @@
+//SVG
 import { motion } from "framer-motion";
 export default function Figures2(props) {
   return (
