@@ -1,3 +1,6 @@
+/* Codigo realizado por lizardo */
+/* Pagina del ingreso */
+// Importacion de librerias
 import { motion } from "framer-motion";
 import { variantsPhone } from "../components/animations/VariantsLogin";
 import AuthForm from "../components/SVGS/Large_screen/AuthForm";
@@ -12,16 +15,19 @@ export default function login() {
     <motion.div variants={variantsPhone} exit="exit" className="grid place-content-center min-h-screen">
 
       <div id={stylesAuth.small_screen_cellphone} >
-
+        {/* Realizando la llamada al componente AuthMinSvg  */}
         <AuthMinSvg />
       </div>
 
       <div id={stylesAuth.max_small_screen_cellphone}  >
+        {/* Realizando la llamada al componente AuthSvg  */}
         <AuthSvg />
 
       </div>
 
       <div id={stylesAuth.large_screen}  >
+        {/* Realizando la llamada al componente AuthForm  */}
+
         <AuthForm />
 
       </div>

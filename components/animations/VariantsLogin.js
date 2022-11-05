@@ -81,7 +81,3 @@ export const variantsMessageEllipse = {
   before: { cx: 285 },
   after: { cx: 11.75 }
 }
-export const variantsMessageCourtains = {
-  //  before: { transform: translate(200) },
-  //after: { transform: translate(100) }
-}

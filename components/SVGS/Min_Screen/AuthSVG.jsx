@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
+
 import {
 
-  variantsLoginError,
+
   variantsLoginform,
   variantsLoginformChilds,
   variantsMessageText,
@@ -12,33 +12,31 @@ import {
 
 } from "../../animations/VariantsLogin";
 
-import { useState } from "react";
 
-import Link from "next/link";
+
+
 import { useRouter } from "next/router";
+import { supabase } from "../../../supabase/client";
 
 export default function AuthSvg(props) {
   const { pathname } = useRouter();
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
-  const [userCredencials, setUserCredencials] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
-  const [isCheck, setIsCheck] = useState(false)
-  const handleChangeChecked = () => {
-    setIsCheck(!isCheck)
+
+
+  async function signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    })
+
   }
 
-  const onSubmit = () => {
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    signInWithGoogle()
+  }
 
-    console.log(userCredencials);
-  }
-  const handleChange = (e) => {
-    setUserCredencials({ ...userCredencials, [e.target.name]: e.target.value })
-  }
+
+
   return (
     <motion.svg xmlns="http://www.w3.org/2000/svg" width={351} height={642} {...props} className="overflow-hidden">
       <g data-name="Grupo 3">
@@ -100,18 +98,9 @@ export default function AuthSvg(props) {
             transform="translate(82 114)"
             fill="rgba(112,112,112,0.56)"
           />
-          {errors.name?.type === 'required' && <foreignObject x="60" y="150" width="220" height="350" stroke='none'><motion.div initial="before"
-            animate="after"
-            variants={variantsLoginError}
-
-            transition={{ duration: 1.5 }} className="bg-red-600 p-2 rounded-xl text-yellow-300">El nombre es requerido.</motion.div></foreignObject>}
-          {errors.name?.type === 'minLength' && <foreignObject x="60" y="150" width="220" height="350" stroke='none'><motion.div initial="before"
-            animate="after"
-
-            variants={variantsLoginError}
-
-            transition={{ duration: 1.5 }} className="bg-red-600 p-2 rounded-xl text-yellow-300">El nombre debe contener al menos 3 caracteres.</motion.div></foreignObject>}
-          {!errors.name && <g> <motion.g
+      
+  
+           <g> <motion.g
             initial="before"
             animate="after"
             variants={variantsPhonePanel}
@@ -139,7 +128,7 @@ export default function AuthSvg(props) {
                 {pathname === "/sign_up" ? "Reg\xEDstrese" : "Ingrese su usuario"}
               </motion.tspan>
             </text>
-          </g>}
+          </g>
 
         </g>
 
@@ -148,20 +137,12 @@ export default function AuthSvg(props) {
           animate="after"
           variants={variantsLoginform} x="50" y="150" width="250" height="450" stroke='none'>
 
-          <form onSubmit={handleSubmit(onSubmit)} >
-            {pathname === "/sign_up" ? (<div><motion.label variants={variantsLoginformChilds} htmlFor="name" >Nombre</motion.label>
-              <motion.input variants={variantsLoginformChilds} type="text" {...register("name", { required: true, minLength: 3 })} className="w-full p-1 mb-10   border-b-2 bg-transparent text-gray-500    caret-yellow-500" /></div>) : ""}
+          <form onSubmit={handleSubmit} >
+          
 
-            <motion.label variants={variantsLoginformChilds} htmlFor="email">Correo</motion.label>
-            <motion.input variants={variantsLoginformChilds} type="email" name="email" onChange={handleChange} className="w-full p-1 mb-10  border-b-2 bg-transparent  text-gray-500 caret-yellow-500" />
-            <motion.label variants={variantsLoginformChilds} htmlFor="password">Contraseña</motion.label>
-            <motion.input variants={variantsLoginformChilds} type="password" name="password" onChange={handleChange} className="w-full p-1 mb-10 border-b-2 bg-transparent text-gray-500  caret-yellow-500" />
-            {pathname === "/sign_up" ? <div> <motion.label variants={variantsLoginformChilds} htmlFor="confirmPassword">Confirmar contraseña</motion.label>
-              <motion.input variants={variantsLoginformChilds} type="password" name="confirmPassword" onChange={handleChange} className="w-full p-1 mb-10 border-b-2 bg-transparent text-gray-500 caret-yellow-500  " /> </div> : ''}
+           
 
-        
-
-            {pathname === "/sign_up" ? <motion.button variants={variantsLoginformChilds} type="submit" className='w-full bg-gray-500 p-2 rounded-xl '>Crear</motion.button> : <motion.button variants={variantsLoginformChilds} type="submit" className='w-full h-16 bg-gray-500 p-2 rounded-xl mt-16'>Ingresar</motion.button>}
+            {pathname === "/sign_up" ? <motion.button variants={variantsLoginformChilds} type="submit" className='w-full bg-gray-500 p-2 rounded-xl mt-6'>Creee su cuenta con google</motion.button> : <motion.button variants={variantsLoginformChilds} type="submit" className='w-full h-16 bg-gray-500 p-2 rounded-xl mt-16 ' > Ingresar con su cuenta de google</motion.button>}
 
 
           </form>

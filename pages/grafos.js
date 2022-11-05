@@ -1,14 +1,36 @@
-
+/* Codigo realizado por  lizardo */
+/* Pagina de grafos */
+// Importacion de librerias
 import Navbar from "../components/Navbar";
-import { Excalidraw } from "@excalidraw/excalidraw";
-
+import { Excalidraw } from "@excalidraw/excalidraw";//Libreria que hace la parte de integracion de formas para renderizarlas en la pantalla
+import { motion } from 'framer-motion'
+import { variantsHome } from "../components/animations/VariantsGrafos";
+import { useEffect } from 'react'
+import { supabase } from "../supabase/client";
+import { useRouter } from "next/router";
 export default function App() {
+  const { push } = useRouter();
+//Verifica si lla estamos registrados
+  useEffect(() => {
+    async function getsesion() {
+      const {data} = await supabase.auth.getSession();
+      if (!data) {
+        push("/login")
+      }
 
+    }
+    getsesion();
+  })
   return (
     <div>
       <Navbar />
+{/* Se anima cuando inicia */}
+      <motion.div
+        variants={variantsHome}
+        initial="hidden"
+        animate="visible"
 
-      <div
+        transition={{ duration: 1 }}
         style={{
           transition: "all .5s ease-in",
           width: "100vw",
@@ -17,6 +39,7 @@ export default function App() {
           position: "relative"
         }}
       >
+        {/* Llamando al componente Excalidraw para la renderizaacion de figuras */}
         <Excalidraw
           initialData={{
             appState: {
@@ -25,7 +48,7 @@ export default function App() {
             elements: [
               {
                 id: "DHWFPSN-r0MzySHwTVMJn",
-                type: "circle",
+                type: "square",
                 x: 200,
                 y: 200,
                 width: 100,
@@ -52,7 +75,8 @@ export default function App() {
             ]
           }}
         />
-      </div>
+      </motion.div>
+      
     </div>
   );
 }

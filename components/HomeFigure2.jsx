@@ -47,13 +47,13 @@ export default function Figures2(props) {
         fontWeight={700}
       >
         <tspan x={0} y={10}>
-          Es una estructura matemática que permite modelar problemas de la vida cotidiana, mediante, como hemos visto, una   
+          Los grafos facilitan este proceso de forma más eficiente con recorridos veloces por la estructura del grafo.    
         </tspan>
         <tspan x={0} y={30}>
-          representación gráfica formada por nodos o vértices que muestra a los actores y aristas que sirven para representar los 
+          Otro elemento importante que aporta la utilización de grafos a modelos ML y de Inteligencia Artificial es la escalabilidad 
         </tspan>
         <tspan x={0} y={50}>
-         lazos o relaciones entre los actores.
+          de datos.
         </tspan>
       </text>
     </svg>

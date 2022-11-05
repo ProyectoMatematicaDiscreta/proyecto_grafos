@@ -1,32 +1,54 @@
+/* Codigo realizado por  lizardo */
+/* Componente Navbar */
+// Importacion de librerias
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "./Logo";
 import stylesNavbar from "../.../../styles/Navbar.module.css";
+import { supabase } from "../supabase/client";
 export default function Navbar() {
-  const [navbar, setNavbar] = useState(false);
+  const [navbar, setNavbar] = useState(false);//Uso del estado
+  const [user, setUser] = useState();
 
+  useEffect(() => {
+    async function getsesion() {
+      const { data, error } = await supabase.auth.getUser();
+      if (data) {
+        setUser(data.user_metadata)
+
+      }
+
+    }
+    getsesion();
+  })
+  const handleSubmit = () => {
+    
+    async function signout() {
+      const { error } = await supabase.auth.signOut()
+    }
+    signout()
+  }
   return (
     <nav className="w-full bg-cyan-400 shadow">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <a href="javascript:void(0)">
-              <h2 className="text-2xl font-bold text-white"><Logo /></h2>
-            </a>
+
+            <Link href="/"><a className="text-2xl font-bold text-white"><Logo /></a></Link>
 
             <ul id={stylesNavbar.itemsNavbar} className=" flex space-x-6  ">
               <li className="text-white hover:text-indigo-200">
-                <Link href="/grafos"><a >Inicio</a></Link>
+                <Link href="/grafos"><a >Grafos</a></Link>
               </li>
               <li className="text-white hover:text-indigo-200">
                 <Link href="/questions"><a >Preguntas</a></Link>
               </li>
-        
+
               <li className="text-white hover:text-indigo-200">
                 <Link href="/handbook"><a>Manual de usuario</a></Link>
               </li>
             </ul>
-            <div className="flex space-x-6" id={stylesNavbar.buttoms}>
+            {!user ? <div className="flex space-x-6" id={stylesNavbar.buttoms}>
               <Link href="/login"><a className="inline-block w-full px-4 py-2 text-center text-white bg-yellow-400 rounded-md shadow hover:bg-green-700"
               >
                 Ingresar
@@ -34,7 +56,9 @@ export default function Navbar() {
               <Link href="sign_up"><a className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-green-700 rounded-md shadow hover:bg-yellow-400">
                 Registrarse
               </a></Link>
-            </div>
+            </div> : <div className="flex">  <p className="my-auto bg-amber-400 p-4  rounded-t-2xl">{user.name}</p>  <form onSubmit={handleSubmit}><button className="bg-red-600 p-4 ml-4 rounded-t-2xl" type="submit">Cerrar Session</button></form></div>}
+
+
             <div id={stylesNavbar.icon} className="">
               <button
                 className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
@@ -80,19 +104,18 @@ export default function Navbar() {
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="text-white hover:text-indigo-200">
-                <Link href="/"><a >Inicio</a></Link>
+                <Link href="/grafos"><a >Grafos</a></Link>
               </li>
               <li className="text-white hover:text-indigo-200">
                 <Link href="/questions"><a>Preguntas</a></Link>
               </li>
-             
-           
+
+
               <li className="text-white hover:text-indigo-200">
                 <Link href="/handbook"><a>Manual de usuario</a></Link>
               </li>
             </ul>
-
-            <div className="flex space-x-6" id={stylesNavbar.buttoms}>
+            {!user ? <div className="flex space-x-6" id={stylesNavbar.buttoms}>
               <Link href="/login"><a className="inline-block w-full px-4 py-2 text-center text-white bg-yellow-400 rounded-md shadow hover:bg-green-700"
               >
                 Ingresar
@@ -100,10 +123,11 @@ export default function Navbar() {
               <Link href="sign_up"><a className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-green-700 rounded-md shadow hover:bg-yellow-400">
                 Registrarse
               </a></Link>
-            </div>
+            </div> : <form onSubmit={handleSubmit}>{user.name}<button className="bg-red-600 inline-block w-full" type="submit">Cerrar Session</button></form>}
+
           </div>
         </div>
-       
+
       </div>
     </nav>
   );

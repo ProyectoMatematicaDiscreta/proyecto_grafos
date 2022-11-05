@@ -1,0 +1,39 @@
+/* Estilos del home */
+/* Codigo realizado por lizardo */
+#image1{
+ position: absolute;
+ transform:translate(1111px, -222px);
+ -webkit-transform:translate(1111px, -222px);
+ -moz-transform:translate(1111px, -222px);
+ -ms-transform:translate(1111px, -222px);
+ -o-transform:translate(1111px, -222px);
+ background: rgba(0, 204, 255, 0.5);
+ -webkit-backdrop-filter: blur(10px);
+ backdrop-filter: blur(10px);
+ padding: 10px;
+ border-radius: 12px;
+ -webkit-border-radius: 12px;
+ -moz-border-radius: 12px;
+ -ms-border-radius: 12px;
+ -o-border-radius: 12px;
+}
+#image2{
+ position: absolute;
+
+ background: rgba(0, 204, 255, 0.5);
+ -webkit-backdrop-filter: blur(10px);
+ backdrop-filter: blur(10px);
+ padding: 10px;
+ border-radius: 12px;
+ -webkit-border-radius: 12px;
+ -moz-border-radius: 12px;
+ -ms-border-radius: 12px;
+ -o-border-radius: 12px;
+}
+#button{
+  transform:translate(711px,-15px);
+  -webkit-transform:translate(711px,-15px);
+  -moz-transform:translate(711px,-15px);
+  -ms-transform:translate(711px,-15px);
+  -o-transform:translate(711px,-15px);
+}
